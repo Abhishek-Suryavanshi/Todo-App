@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './TodoItems.module.css'
 
 // let myStyle = { 'text-decoration': 'line-through' };
 
@@ -29,7 +30,7 @@ const TodoItems = (props) => {
     let strikeOrNot = task.checked ? 'line-through' : '';
     return (
         // Applying on this because yhe pta chal jayega kha click kra
-        <div id={task.id} onClick={updateCheckBoxHandler}>
+        <div id={task.id} onClick={updateCheckBoxHandler} className='itemContainer'>
             <input className="checkbox" type='checkbox' />
             <span style={{ 'textDecoration': strikeOrNot }}>{task.name}</span>
             {upShow && <button className='upArrow'>↑</button>}
