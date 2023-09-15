@@ -1,10 +1,11 @@
 import React from 'react'
 import TodoItems from '../TodoItems/TodoItems';
+import styles from './Todolist.module.css'
 
 const Todolist = (props) => {
-    const { todos, updateCheckBox, deleteItem } = props;
+    const { todos, updateCheckBox, deleteItem, upArrowHandler, downArrowHandler } = props;
     return (
-        <div>
+        <div className={styles.listContainer}>
             <ul>
                 {todos.map((item, indx) =>
                     <TodoItems
@@ -14,6 +15,8 @@ const Todolist = (props) => {
                         downShow={indx != todos.length - 1 ? true : false}
                         key={item.id}
                         task={item}
+                        upArrowHandler={upArrowHandler}
+                        downArrowHandler={downArrowHandler}
                     />)}
             </ul>
         </div>

@@ -20,26 +20,78 @@ const Todo = () => {
 
     const updateCheckBox = (id) => {
         // console.log(id);
-        setTodos((prevState) =>
-            prevState.map((todo) => {
+        setTodos((prevState) => {
+            let data = prevState.map((todo) => {
                 return (todo.id == id) ? { name: todo.name, id: todo.id, checked: !todo.checked } : todo;
             })
-        )
+
+            localStorage.setItem('todos', JSON.stringify(data));
+            return data;
+        })
     }
 
     const deleteItem = (id) => {
-        setTodos((prevState) =>
-            prevState.filter((task) => {
+        setTodos((prevState) => {
+            let data = prevState.filter((task) => {
                 if (task.id != id) return true;
             })
-        )
+
+            localStorage.setItem('todos', JSON.stringify(data));
+            return data;
+        })
+    }
+
+    const upArrowHandler = (id) => {
+        // console.log(id);
+        setTodos((prevState) => {
+            let index;
+            let data = prevState.map((item, indx) => {
+                if (item.id == id) {
+                    index = indx;
+                }
+
+                return item;
+            })
+
+            let temp = data[index];
+            data[index] = data[index - 1];
+            data[index - 1] = temp;
+
+            return data;
+        })
+    }
+
+    const downArrowHandler = (id) => {
+        // console.log(id);
+        setTodos((prevState) => {
+            let index;
+            let data = prevState.map((item, indx) => {
+                if (item.id == id) {
+                    index = indx;
+                }
+
+                return item;
+            })
+
+            let temp = data[index];
+            data[index] = data[index + 1];
+            data[index + 1] = temp;
+
+            return data;
+        })
     }
 
     return (
         <div className={styles.todo}>
             <TodoHeading />
             <TodoInput updateTodo={updateTodo} />
-            <Todolist todos={todos} updateCheckBox={updateCheckBox} deleteItem={deleteItem} />
+            <Todolist
+                todos={todos}
+                updateCheckBox={updateCheckBox}
+                deleteItem={deleteItem}
+                upArrowHandler={upArrowHandler}
+                downArrowHandler={downArrowHandler}
+            />
         </div>
     )
 }

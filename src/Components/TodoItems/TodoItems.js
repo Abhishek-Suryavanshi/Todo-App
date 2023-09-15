@@ -4,7 +4,7 @@ import styles from './TodoItems.module.css'
 // let myStyle = { 'text-decoration': 'line-through' };
 
 const TodoItems = (props) => {
-    let { task, upShow, downShow, updateCheckBox, deleteItem } = props;
+    let { task, upShow, downShow, updateCheckBox, deleteItem, upArrowHandler, downArrowHandler } = props;
 
     const updateCheckBoxHandler = (ev) => {
         // console.log(ev.target.className);
@@ -17,10 +17,10 @@ const TodoItems = (props) => {
             updateCheckBox(id);
         }
         else if (class_name == 'upArrow') {
-
+            upArrowHandler(id);
         }
         else if (class_name == 'downArrow') {
-
+            downArrowHandler(id);
         }
         else if (class_name == 'delete') {
             deleteItem(id);
